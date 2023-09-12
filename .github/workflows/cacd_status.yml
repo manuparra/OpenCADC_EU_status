@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Check Out Repository
+        uses: actions/checkout@v2
+
       - name: Check Web Service Status
         run: |
           # Replace <YOUR_URL> with the URL of the web service you want to check
@@ -25,11 +29,6 @@ jobs:
           
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
           
-          # Create a CSV file if it doesn't exist and append the data
-          git config user.name "Manuel Parra"
-          git config user.email "manuparra@gmail."
-          git clone https://github.com/manuparra/OpenCADC_EU_status.git
-          cd OpenCADC_EU_status
           # Commit the changes to the repository
           echo "$TIMESTAMP;$STATUS_TEXT" >> service_status.csv
           git add service_status.csv
