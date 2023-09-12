@@ -28,7 +28,8 @@ jobs:
           fi
           
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
-          
+          git config user.name "manuparra"
+          git config user.email "manuparra@gmail.com"
           # Commit the changes to the repository
           echo "$TIMESTAMP;$STATUS_TEXT" >> service_status.csv
           git add service_status.csv
