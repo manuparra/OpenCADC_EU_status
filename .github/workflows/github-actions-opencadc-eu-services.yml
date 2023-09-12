@@ -1,0 +1,39 @@
+name: Check Web Service Status
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Run the job every hour
+
+jobs:
+  check_service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Web Service Status
+        run: |
+          # Replace <YOUR_URL> with the URL of the web service you want to check
+          SERVICE_URL="https://ska-gms.stfc.ac.uk/gms/availability"
+          
+          # Use curl to check if the service is up (200 OK response)
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL)
+          
+          if [ $STATUS_CODE -eq 200 ]; then
+            STATUS_TEXT="Service is up!"
+          else
+            STATUS_TEXT="Service is down!"
+          fi
+          
+          TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
+          
+          # Write the status and timestamp to the file
+          echo "$TIMESTAMP;$STATUS_TEXT" >> service_status.csv
+          
+          # Commit the changes to the repository
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add service_status.txt
+          git commit -m "Update service status"
+          git push
+
+        # This will run only if the previous step succeeds
+        if: always()
