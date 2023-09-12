@@ -26,13 +26,14 @@ jobs:
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
           
           # Create a CSV file if it doesn't exist and append the data
-          echo "$TIMESTAMP,$STATUS_TEXT" >> service_status.csv
-          
+          git config user.name "Manuel Parra"
+          git config user.email "manuparra@gmail."
+          git clone https://github.com/manuparra/OpenCADC_EU_status.git
+          cd OpenCADC_EU_status
           # Commit the changes to the repository
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          echo "$TIMESTAMP;$STATUS_TEXT" >> service_status.csv
           git add service_status.csv
-          git commit -m "Update service status"
+          git commit -m "Update service status $TIMESTAMP"
           git push
 
         if: always()
