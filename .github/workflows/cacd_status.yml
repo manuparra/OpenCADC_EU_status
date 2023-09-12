@@ -2,7 +2,7 @@ name: Check Web Service Status
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Run the job every hour
+    - cron: '*/5 * * * *'  # Run the job every hour
 
 jobs:
   check_service:
