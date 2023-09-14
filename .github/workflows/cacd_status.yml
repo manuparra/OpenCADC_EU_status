@@ -30,7 +30,7 @@ jobs:
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
           git config user.name "manuparra"
           git config user.email "manuparra@gmail.com"
-          git remote add origin https://github.com/manuparra/OpenCADC_EU_status.git
+          git remote set-url origin https://github.com/manuparra/OpenCADC_EU_status.git
           git pull
           git add service_status.csv
           git commit -m "Update service status - $TIMESTAMP"
