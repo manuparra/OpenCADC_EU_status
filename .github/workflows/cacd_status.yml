@@ -26,6 +26,8 @@ jobs:
           else
             STATUS_TEXT="Service is down!"
           fi
+
+          echo "$TIMESTAMP,argus,$STATUS_TEXT" >> service_status.csv
           
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
           git config user.name "manuparra"
