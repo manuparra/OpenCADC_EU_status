@@ -9,14 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Check Out Repository
-        uses: actions/checkout@v3
+      - name: Check Out Repository                
+      - uses: actions/checkout@v4      
         with:
-          token: ${{ secrets.CADC }}
-
-      - name: Check Web Service Status
-        run: |
+          token: ${{ CAC }}      
+      - run: |
           # Replace <YOUR_URL> with the URL of the web service you want to check
           SERVICE_URL="https://spsrc31.iaa.csic.es/argus/availability"
           
@@ -32,8 +29,8 @@ jobs:
           echo "$TIMESTAMP,argus,$STATUS_TEXT" >> service_status.csv
           
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
-          git config user.name "manuparra"
-          git config user.email "manuparra@gmail.com"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add service_status.csv
           git commit -m "Update service status - $TIMESTAMP"
           git push
