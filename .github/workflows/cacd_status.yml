@@ -9,10 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Out Repository                
       - uses: actions/checkout@v4      
         with:
-          token: ${{ CAC }}      
+          token: ${{ CACD }}
       - run: |
           # Replace <YOUR_URL> with the URL of the web service you want to check
           SERVICE_URL="https://spsrc31.iaa.csic.es/argus/availability"
