@@ -36,7 +36,7 @@ jobs:
           git pull
           git add service_status.csv
           git commit -m "Update service status - $TIMESTAMP"
-          git push https://$CADCSECRET@github.com/manuparra/OpenCADC_EU_status.git
+          git push https://${{ secrets.CADCSECRET }}$@github.com/manuparra/OpenCADC_EU_status.git
 
 
         if: always()
