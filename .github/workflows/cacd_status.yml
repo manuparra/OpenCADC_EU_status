@@ -11,7 +11,9 @@ jobs:
     steps:
 
       - name: Check Out Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.CADC }}
 
       - name: Check Web Service Status
         run: |
@@ -32,11 +34,9 @@ jobs:
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
           git config user.name "manuparra"
           git config user.email "manuparra@gmail.com"
-          git remote set-url origin https://github.com/manuparra/OpenCADC_EU_status.git
-          git pull
           git add service_status.csv
           git commit -m "Update service status - $TIMESTAMP"
-          git push https://${{ secrets.CADCSECRET }}@github.com/manuparra/OpenCADC_EU_status.git
+          git push
 
 
         if: always()
