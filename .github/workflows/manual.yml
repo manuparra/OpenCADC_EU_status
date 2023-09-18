@@ -1,0 +1,29 @@
+name: Fetch and Store HTML
+
+on: workflow_dispatch
+
+jobs:
+  fetch_and_store:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v2
+
+      - name: Fetch HTML
+        run: |
+          # Replace <YOUR_URL> with the URL of the HTML file you want to fetch
+          URL="https://stackoverflow.com/questions/62240272/deleting-namespace-was-stuck-at-terminating-state"
+          
+          # Fetch the HTML content and store it in a file
+          curl -o fetched.html $URL
+          
+          # Commit the HTML file to the repository
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add fetched.html
+          git commit -m "Update fetched HTML"
+          git push
+
+        # This will run only if the previous step succeeds
+        if: always()
