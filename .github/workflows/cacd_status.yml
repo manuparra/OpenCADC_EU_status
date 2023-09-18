@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4      
         with:
-          token: ${{ CACD }}
+          token: ${{ secrets.CACD }}
       - run: |
           # Replace <YOUR_URL> with the URL of the web service you want to check
           SERVICE_URL="https://spsrc31.iaa.csic.es/argus/availability"
